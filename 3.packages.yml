@@ -1,0 +1,19 @@
+---
+- name: Install required packages
+  hosts: vm2
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Install pkgs
+      ansible.builtin.dnf:
+        name:
+          - php
+          - mariadb
+          - "@RPM Development Tools"
+        state: present
+
+    - name: Update packages to latest
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
