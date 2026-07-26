@@ -1,0 +1,18 @@
+---
+- name: Update /etc/issue
+  hosts: vm2
+  become: true
+  gather_facts: false
+
+  vars:
+    issue_messages:
+      vm2: Test
+      vm3: dev
+      vm4: prod
+
+  tasks:
+    - name: update vm2
+      ansible.builtin.copy:
+        content: "{{ issue_messages[inventory_hostname] }}"
+        dest: /etc/issue
+        
