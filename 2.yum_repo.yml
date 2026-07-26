@@ -1,0 +1,33 @@
+---
+- name: Ensures local Base OS repo
+  hosts: vm2
+  become: true
+
+  tasks:
+    - name: Import GPG key
+      ansible.builtin.rpm_key:
+        key: /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+        state: present
+
+    - name: Configure BaseOS local repo
+      ansible.builtin.yum_repository:
+        name: EX294_Baseos
+        description: Local BaseOS repo
+        baseurl: file:///run/media/student/RHEL-10-1-BaseOS-x86_64/BaseOS
+        enabled: true
+        gpgcheck: true
+        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+        file: AU294
+        state: present
+
+    - name: Configure AppStream local repo
+      ansible.builtin.yum_repository:
+        name: EX294_Appstream
+        description: Local AppStream repo
+        baseurl: file:///run/media/student/RHEL-10-1-BaseOS-x86_64/AppStream
+        enabled: true 
+        gpgcheck: true
+        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+        file: AU294
+        state: present
+        
