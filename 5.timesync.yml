@@ -1,0 +1,25 @@
+---
+- name: Use the timesync role
+  hosts: vm2
+  become: true
+  gather_facts: false
+
+  vars:
+    timesync_ntp_servers:
+      - hostname: vm1
+        iburst: true
+
+  roles:
+    - redhat.rhel_system_roles.timesync
+
+
+# Verify the role name
+# ansible-galaxy role list
+# ansible-galaxy collection list
+#
+# How do you know the correct variable names?
+# ansible-doc redhat.rhel_system_roles.timesync
+#
+# or look at the role's defaults:
+# ls /usr/share/ansible/roles/rhel-system-roles.timesync/defaults
+# ls /usr/share/ansible/collections/ansible_collections/redhat/rhel_system_roles/roles/timesync/defaults
