@@ -1,0 +1,51 @@
+---
+- name: Create the web content directory
+  hosts: vm2
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure webdev group exists
+      ansible.builtin.group:
+        name: webdev
+        state: present
+
+    - name: Ensure /webdev directory exists
+      ansible.builtin.file:
+        path: /webdev
+        state: directory
+        owner: root
+        group: webdev
+        mode: '2775'
+        recurse: true
+
+    - name: Create symbolic link
+      ansible.builtin.file:
+        src: /webdev
+        dest: /var/www/html/webdev
+        state: link
+
+    - name: Create index.html
+      ansible.builtin.copy:
+        content: "Development\n"
+        dest: /webdev/index.html
+        owner: root
+        group: webdev
+        mode: '0644'
+
+    - name: Configure persistent SELinux context
+      redhat.rhel_system_roles.sefcontext:
+        #ansible.posix.sefcontext:
+        target: "/webdev(/.*)?"
+        setype: httpd_sys_content_t
+        state: present
+
+    - name: Restore SELinux context
+      ansible.builtin.command:
+        cmd: restorecon -Rv /webdev
+      changed_when: false
+
+
+
+  ## ansible-doc -l | grep <module_name>
+  ## ansible-doc -l | grep sel
