@@ -13,6 +13,7 @@
   tasks:
     - name: update vm2
       ansible.builtin.copy:
-        content: "{{ issue_messages[inventory_hostname] }}"
+        content: "{{ issue_messages[group_names[0]] }}"
+        # content: "{{ issue_messages[inventory_hostname] }}"
         dest: /etc/issue
         
