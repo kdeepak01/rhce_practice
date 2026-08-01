@@ -1,0 +1,16 @@
+---
+- name: Configure a cron job for user
+  hosts: vm2
+  become: true
+
+  tasks:
+    - name: Configure cron job for logger command
+      ansible.builtin.cron:
+        name: logger job
+        user: student
+        minute: "*/2"
+        job: 'logger "EX294 in progress"'
+        state: present
+
+## journalctl -g "EX294 in progress"
+## journalctl | grep "EX294 in progress"
