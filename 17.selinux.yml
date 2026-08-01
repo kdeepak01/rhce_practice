@@ -1,0 +1,19 @@
+---
+- name: Configure SELinux policy
+  hosts: vm2
+  become: true
+
+  vars:
+    selinux_policy: targeted
+    selinux_state: enforcing
+
+  roles:
+    - redhat.rhel_system_roles.selinux
+
+## Verify the role variable
+## ansible-doc redhat.rhel_system_roles.selinux 
+## ansible.posix.selinux                                          Change policy..
+## redhat.rhel_system_roles.selinux                               Change policy..
+## redhat.rhel_system_roles.selinux_modules_facts                 Gather state...
+## redhat.rhel_system_roles.selinux → Used when the task asks you to configure SELinux mode or policy
+## redhat.rhel_system_roles.sefcontext → Very common when the task asks Apache (or another service) to use a non-default directory such as /webdev, /website, or /srv/www. You'll typically use it together with restorecon to apply the new labels.
