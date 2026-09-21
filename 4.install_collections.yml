@@ -1,0 +1,16 @@
+# the tar files of collections will be given
+# need to download those
+# then install those
+# then verify the collections/roles
+#
+
+1.    wget http://utility.lab13.example.com/materials/redhat.rhel_system_roles-1.19.3.tar.gz
+
+2.    ansible-galaxy collection install redhat.rhel_system_roles-1.19.3.tar.gz
+
+      or
+
+      ansible-galaxy collection install redhat.rhel_system_roles-1.19.3.tar.gz -p mycollections
+
+3.    ansible-galaxy collection list
+4.    ansible-galaxy role list
