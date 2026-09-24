@@ -1,0 +1,8 @@
+---
+- name: balancer
+  src: https://github.com/bbatsche/Ansible-PHP-Site-Role.git
+
+- name: phpinfo
+  src: https://github.com/geerlingguy/ansible-role-haproxy.git
+
+# ansible-galaxy role install -r requirements.yml -p /home/opsadm/ansible/roles
