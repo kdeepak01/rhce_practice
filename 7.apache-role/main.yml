@@ -1,0 +1,7 @@
+---
+- name: Use apache role
+  hosts: vm3
+  become: true
+
+  roles:
+    - apache
