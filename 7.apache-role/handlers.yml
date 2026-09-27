@@ -1,0 +1,6 @@
+---
+# handlers file for apache
+- name: Restart httpd
+  ansible.builtin.service:
+    name: "{{ web_svc }}"
+    state: restarted
