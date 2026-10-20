@@ -8,3 +8,6 @@
   apache/vars/main.yml
   apache/handlers/main.yml
   apache/templates/index.html.j2
+
+## To install posix module
+   # ansible-galaxy collection install ansible.posix
