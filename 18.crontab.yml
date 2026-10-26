@@ -14,3 +14,4 @@
 
 ## journalctl -g "EX294 in progress"
 ## journalctl | grep "EX294 in progress"
+## "name" parameter is very important for ansible to identify jobs, it acts like a unique ID
