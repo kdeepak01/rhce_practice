@@ -1,0 +1,15 @@
+You have to install ansible in exam first.
+# sudo dnf install ansible*
+# which ansible
+# rpm -qa ansible*
+
+Run::
+# ansible-navigator
+to pull the ansible-navigator image after login 
+
+# podman pull <image url>
+
+Create a Project directory in user's home directory
+# mkdir ansible
+# cd ansible
+# vim inventory
