@@ -11,3 +11,7 @@
 
 ## To install posix module
    # ansible-galaxy collection install ansible.posix
+
+# ansible-doc -l | grep posix
+
+# ansible-doc ansible.posix.firewalld
