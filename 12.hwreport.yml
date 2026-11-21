@@ -1,0 +1,18 @@
+---
+- name: Create hardware report
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Create hardware report
+      ansible.builtin.template:
+        src: hwreport.j2
+        dest: /root/hwreport.txt
+
+
+
+# ansible all -m setup
+# ansible all -m setup | grep memtotal
+# ansible all -m setup | grep bios
+# ansible all -m setup | grep devices
+# ansible all -m setup -a "filter=ansible_devices"
