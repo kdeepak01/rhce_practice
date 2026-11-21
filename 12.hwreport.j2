@@ -1,0 +1,16 @@
+Inventory_Hostname = {{ inventory_hostname }}
+Total_Memory = {{ ansible_facts.memtotal_mb }} MB
+Bios_version = {{ ansible_facts.bios_version }}
+VDA_Size = {{ ansible_facts.devices.vda.size }}
+{% if 'vdb' in ansible_facts.devices %}
+VDB_Size = {{ ansible_facts.devices.vdb.size }}
+{% else %}
+VDB_Size = None
+{% endif %}
+
+
+
+# hostvars[inventory_hostname].ansible_default_ipv4_address
+# Notice how this uses both::
+      # ==> hostvars[inventory_hostname] --> bracket notation because the hostname is dynamic.
+      # ==> .ansible_default_ipv4_address --> dot notation because those are fixed keys.
