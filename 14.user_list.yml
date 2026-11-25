@@ -1,0 +1,13 @@
+myusers:
+  - name: user1
+    job: developer
+    uid: 2000
+    
+  - name: user2
+    job: manager
+    uid: 3000
+    
+  - name: user3
+    job: manager
+    uid: 4000
+    
