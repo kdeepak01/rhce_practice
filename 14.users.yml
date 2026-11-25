@@ -1,0 +1,64 @@
+---
+- name: Create Users
+  hosts: dev test
+  become: true
+
+  vars_files:
+    - 14.user_list.yml
+    - 13.locker.yml
+
+  tasks:
+    - name: Ensure group devops exists
+      ansible.builtin.group:
+        name: devops
+        state: present
+
+    - name: Create user in dev and test group
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        uid: "{{ item.uid }}"
+        comment: "{{ item.job }}"
+        groups: devops
+        append: yes
+        shell: /bin/bash
+        create_home: true
+        state: present
+        password_expire_max: 30
+        password: "{{ pw_developer | password_hash('sha512') }}"
+      loop: "{{ myusers }}"
+      when: item.job == "developer"
+
+
+
+- name: Create Users
+  hosts: prod
+  become: true
+  vars_files:
+    - 14.user_list.yml
+    - 13.locker.yml
+
+  tasks:
+    - name: Ensure group opsmgr exists
+      ansible.builtin.group:
+        name: opsmgr
+        state: present
+
+    - name: Create user in prod group
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        uid: "{{ item.uid }}"
+        comment: "{{ item.job }}"
+        groups: opsmgr
+        append: yes
+        shell: /bin/bash
+        create_home: true
+        state: present
+        password_expire_max: 30
+        password: "{{ pw_manager | password_hash('sha512') }}"
+      loop: "{{ myusers }}"
+      when: item.job == "manager"
+
+
+
+# group -->> primary group
+# groups -->> secondary group
